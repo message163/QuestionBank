@@ -1,0 +1,16 @@
+{
+  "name": "@questionbank/index",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "pnpm -C server start:dev",
+    "start:app": "pnpm -C app dev",
+    "start:back": "pnpm -C backmanger dev",
+    "start:ts":"pnpm -C config dev",
+    "start:fs": "pnpm -C fs start:dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

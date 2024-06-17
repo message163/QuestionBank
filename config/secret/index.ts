@@ -1,0 +1,1 @@
+export const projectSecret = '%^HUYBSDBLHUBHBDB?LU%^&*UXMZS*&&BUBEDEUB'
