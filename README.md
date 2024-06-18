@@ -9,3 +9,14 @@
 3. config 配置文件
 4. fs 文件系统OSS 分布式
 5. server 服务端 分布式
+
+
+### 技术栈
+
+前端
+
+1. vue3 + vite + ts + pinia + vue-router + element-plus + vueuse
+
+后端
+
+1. Nestjs + ts + webpack + MQ + mongodb
