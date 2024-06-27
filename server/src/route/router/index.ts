@@ -38,7 +38,7 @@ export const Router = [
                 authority: 1,
             }
         ]
-    }, 
+    },
     {
         title: '题库管理',
         authority: 1,
@@ -55,6 +55,45 @@ export const Router = [
                 order: 3,
                 type: 1,
                 parentId: 5,
+                authority: 1,
+            }
+        ]
+    },
+    {
+        title: '知识点管理',
+        authority: 1,
+        icon: 'Star',
+        id: 7,
+        children: [
+            {
+                title: '知识点列表',
+                path: '/page/knowledge',
+                name: 'knowledge',
+                componentUrl: '@/views/knowledge/index.vue',
+                id: 8,
+                icon: 'tickets',
+                order: 4,
+                type: 1,
+                parentId: 7,
+                authority: 1,
+            }
+        ]
+    },
+    {
+        title: '学科管理',
+        authority: 1,
+        icon: 'Notebook',
+        id: 9,
+        children: [
+            {
+                title: '学科列表',
+                path: '/page/subject',
+                name: 'subject',
+                componentUrl: '@/views/subject/index.vue',
+                id: 10,
+                order: 4,
+                type: 1,
+                parentId: 9,
                 authority: 1,
             }
         ]
