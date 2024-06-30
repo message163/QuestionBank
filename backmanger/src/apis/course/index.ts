@@ -9,7 +9,6 @@ export const getCourseList = async <T = any>(params: any): Promise<T> => {
 }
 
 export const updateCourse = async <T = any>(data: any): Promise<T> => {
-    console.log(data, 123123)
     return (await http.patch<T>(`/api/course/update/${data._id}`,data)).data
 }
 

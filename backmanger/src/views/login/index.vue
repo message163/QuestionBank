@@ -51,7 +51,13 @@ const generateCodeAsync = async () => {
     ruleForm.svg = await getCode<string>();
 }
 
+const init = () => {
+    //如果是进入登录页那么应该清楚所有状态
+    localStorage.clear()
+}
+
 onMounted(() => {
+    init()
     generateCodeAsync();
 });
 
@@ -71,14 +77,20 @@ const rules = reactive<FormRules<typeof ruleForm>>({
 const submitForm = () => {
     form.value?.validate(async (valid) => {
         if (valid) {
-            const res = await login(ruleForm);
-            if (res.code == 200) {
-                ElMessage.success(res.data.message)
-                localStorage.setItem(TOEKN, res.data.token)
-                await getRoutersList()
-                router.replace('/page/course')
-            } else {
-                ElMessage.error(res.data.message)
+            try {
+                const res = await login(ruleForm);
+                if (res.code == 200) {
+                    ElMessage.success(res.data.message)
+                    localStorage.setItem(TOEKN, res.data.token)
+                    await getRoutersList()
+                    router.replace('/page/course')
+                } else {
+                    ElMessage.error(res.data.message)
+                }
+            }
+            catch (error:any) {
+                const response = error?.response
+                ElMessage.error(response?.data?.data?.message || '登录失败')
             }
         }
     })

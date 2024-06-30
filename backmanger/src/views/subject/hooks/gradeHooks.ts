@@ -1,11 +1,32 @@
-import { ref, computed } from 'vue'
-import { gradeList, type GradeForm } from '@questionbank/config/grade/index.ts'
-import { createGrade } from '@/apis/grade'
+import { ref, computed, reactive } from 'vue'
+import { gradeList, type GradeForm,type Grade } from '@questionbank/config/grade/index.ts'
+
 export const useGrade = () => {
+
+    let formData = reactive({
+        gradeList: [
+            {
+                grade: gradeList[0].value,
+                subject: [{ name: '' }],
+                _id: ''
+            },
+        ]
+    })
+
+
+    const resetForm = () => {
+        formData.gradeList = [
+            {
+                grade: gradeList[0].value,
+                subject: [{ name: '' }],
+                _id: ''
+            },
+        ]
+    }
 
     const addGrade = (form: GradeForm) => {
         form.push({
-            grade: gradeList[0].value,
+            grade: null,
             subject: [{ name: '' }]
         })
     }
@@ -25,15 +46,22 @@ export const useGrade = () => {
         }
     })
 
-    const submit = (form: GradeForm) => {
-        createGrade(form)
-    }
+    //选过的就不能再选
+    const disableGrade = computed(() => {
+        return formData.gradeList.map((item) => {
+            return item.grade
+        }).filter((item) => {
+            return item
+        })
+    })
 
     return {
+        disableGrade,
+        formData,
         addGrade,
         deleteGrade,
         isFirstGrade,
         isLastGrade,
-        submit
+        resetForm,
     }
 }
