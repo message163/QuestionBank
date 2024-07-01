@@ -34,20 +34,34 @@ export const gradeList = [
 ]
 
 
-type GradeList = typeof gradeList 
+type GradeList = typeof gradeList
 
 type GradeValue = GradeList[number]['value']
 
 export interface Subject {
     name: string
+    id?: string
+}
+
+export interface KnowledgeSubject extends Subject {
+    id: string
 }
 
 export type SubList = Subject[]
-
-
+export type KnowledgeSublist = KnowledgeSubject[]
 export interface Grade {
-    grade:GradeValue
-    subject:SubList
+    grade: GradeValue | undefined | null
+    subject: SubList
+    _id?: string
+    showpopover?: boolean
 }
+
+export interface Knowledge {
+    grade: GradeValue | undefined | null
+    subject: KnowledgeSublist
+    _id: string
+}
+
+export type KnowledgeForm = Knowledge[]
 
 export type GradeForm = Grade[]

@@ -13,13 +13,14 @@
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYmQ0YWQ0Y2MtMjdkNC00ZDM4LWJjYTAtMmI0MTQ4NDRlZTI3IiwiaWF0IjoxNzE4MjM4ODkxLCJleHAiOjE3MTgyMzg5NTF9.meeeXDAZpKwLYXew6yev8zb2Q6w2VRTbX-847xFRey8
 
 
-POST http://localhost:3000/auth/login HTTP/1.1
+POST http://localhost:3000/user/create HTTP/1.1
 Host: localhost:3000
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYmQ0YWQ0Y2MtMjdkNC00ZDM4LWJjYTAtMmI0MTQ4NDRlZTI3IiwiaWF0IjoxNzE4MjQxOTk1LCJleHAiOjE3MTgyNDIwNTV9.eBwV8oDQKMkbmAHzmfu1QhIKa6IUy_DkEB46W5wLlqU
 
 {
     
     "account": "admin",
-    "password": "admin"
+    "password": "admin",
+    "username": "Admin",
+    "role":1
 }

@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { GradeService } from './grade.service';
-import { CreateGradeDto } from './dto/create-grade.dto';
+import { CreateGradeDto, type Query as Params } from './dto/create-grade.dto';
 import { UpdateGradeDto } from './dto/update-grade.dto';
 
 @Controller('grade')
@@ -13,22 +13,18 @@ export class GradeController {
   }
 
   @Get('list')
-  findAll() {
-    return this.gradeService.findAll();
+  findAll(@Query() query: Params) {
+    return this.gradeService.findAll(query);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.gradeService.findOne(+id);
-  }
 
-  @Patch(':id')
+  @Patch('/update/:id')
   update(@Param('id') id: string, @Body() updateGradeDto: UpdateGradeDto) {
-    return this.gradeService.update(+id, updateGradeDto);
+    return this.gradeService.update(id, updateGradeDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   remove(@Param('id') id: string) {
-    return this.gradeService.remove(+id);
+    return this.gradeService.remove(id);
   }
 }

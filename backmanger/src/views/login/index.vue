@@ -23,6 +23,9 @@
                                 </div>
                             </div>
                         </el-form-item>
+                        <el-form-item prop="remember">
+                            <el-checkbox v-model="ruleForm.remember">记住我</el-checkbox>
+                        </el-form-item>
                         <el-form-item>
                             <el-button type="primary" @click="submitForm()">登录</el-button>
                         </el-form-item>
@@ -43,6 +46,7 @@ import { getCode, login } from '@/apis/login';
 import { ElMessage } from 'element-plus'
 import { TOEKN } from '@/config/index'
 import useMenu from '@/stores/menu'
+import Cookie from 'js-cookie'
 const router = useRouter();
 const { getRoutersList } = useMenu()
 const form = ref<FormInstance>();
@@ -53,6 +57,9 @@ const generateCodeAsync = async () => {
 
 const init = () => {
     //如果是进入登录页那么应该清楚所有状态
+    ruleForm.account = Cookie.get('account') || ''
+    ruleForm.password = Cookie.get('password') || ''
+    ruleForm.remember = (Cookie.get('account') || Cookie.get('password')) ? true : false
     localStorage.clear()
 }
 
@@ -66,13 +73,28 @@ const ruleForm = reactive({
     password: '',
     svg: '',
     code: '',
+    remember: false
 });
 
 const rules = reactive<FormRules<typeof ruleForm>>({
     account: [{ required: true, message: '请输入账号', trigger: 'change' }, { message: '请输入账号', trigger: 'blur' }],
     password: [{ required: true, message: '请输入密码', trigger: 'change' }, { message: '请输入密码', trigger: 'blur' }],
     code: [{ required: true, message: '请输入验证码', trigger: 'change' }, { message: '请输入验证码', trigger: 'blur' }],
+    remember: [{ required: false, message: '请勾选记住我', trigger: 'change' }, { required: false, message: '请勾选记住我', trigger: 'blur' }],
 });
+
+const rememberCookie = () => {
+    if (ruleForm.remember) {
+        //存储三十天
+        if (Cookie.get('account') || Cookie.get('password')) return;
+        const expires = { expires: 30 }
+        Cookie.set('account', ruleForm.account, expires)
+        Cookie.set('password', ruleForm.password, expires)
+    } else {
+        Cookie.remove('account')
+        Cookie.remove('password')
+    }
+}
 
 const submitForm = () => {
     form.value?.validate(async (valid) => {
@@ -80,7 +102,8 @@ const submitForm = () => {
             try {
                 const res = await login(ruleForm);
                 if (res.code == 200) {
-                    ElMessage.success(res.data.message)
+                    ElMessage.info(res.data.message)
+                    rememberCookie()
                     localStorage.setItem(TOEKN, res.data.token)
                     await getRoutersList()
                     router.replace('/page/course')
@@ -88,7 +111,7 @@ const submitForm = () => {
                     ElMessage.error(res.data.message)
                 }
             }
-            catch (error:any) {
+            catch (error: any) {
                 const response = error?.response
                 ElMessage.error(response?.data?.data?.message || '登录失败')
             }
