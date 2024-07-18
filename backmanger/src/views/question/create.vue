@@ -1,9 +1,19 @@
 <template>
-    <el-dialog :model-value="true" title="题目">
+    <el-dialog draggable :model-value="true" title="题目">
         <div ref="questionRef" class="question-create">
             <el-form>
+                {{ knowledgeId }}
                 <el-form-item v-for="(item, index) in question">
                     <el-row>
+                        <el-col :span='3'>科目</el-col>
+                        <el-col :span="21">
+                            <el-select @change="changeSubject" v-model="subjectId" clearable placeholder="请选择知识点">
+                                <el-option-group :label="getLabel(group)" v-for="group in list">
+                                    <el-option :value="item.id" :label="`${getLabel(group)}(${item.name})`"
+                                        v-for="item in group.subject"></el-option>
+                                </el-option-group>
+                            </el-select>
+                        </el-col>
                         <el-col :span="3"><b>题目{{ index + 1 }}：</b></el-col>
                         <el-col :span="21">
                             <el-radio-group v-model="item.type">
@@ -27,12 +37,10 @@
                         <el-col :span="21">
                             <el-rate show-score v-model="item.degree"> </el-rate>
                         </el-col>
-                        <el-col :span="3">科目：</el-col>
+                        <el-col :span="3">关联知识点：</el-col>
                         <el-col :span="21">
-                            <el-select v-model="item.category" placeholder="请选择科目">
-                                <el-option v-for="item in categoryList" :label="item.label"
-                                    :value="item.value"></el-option>
-                            </el-select>
+                            <el-tree-select multiple filterable  v-model="knowledgeId" default-expand-all value-key='id'
+                                :data="dataSource"></el-tree-select>
                         </el-col>
                         <el-col :span="3">附件：</el-col>
                         <el-col :span="21">
@@ -53,11 +61,17 @@
                         <el-col :span="21">
                             <el-input v-model="item.time" type="number" placeholder="请输入本题答题时间" />
                         </el-col>
+                        <el-col :span="3">试题来源：</el-col>
+                        <el-col :span="21">
+                            <el-input :rows="3" type="textarea" :maxlength="500" v-model="item.analysis"
+                                style="width:100%;" placeholder="请输入试题来源" />
+                        </el-col>
                         <el-col :span="3">解析：</el-col>
                         <el-col :span="21">
                             <el-input :rows="3" type="textarea" :maxlength="500" v-model="item.analysis"
                                 style="width:100%;" placeholder="请输入解析" />
                         </el-col>
+
                     </el-row>
                     <div class="question-footer">
                         <el-button type="primary" v-if="isLast(index)" @click="addQuestion">添加题目</el-button>
@@ -81,7 +95,13 @@ import { subjecetList, categoryList } from '@questionbank/config/subject/index.t
 import answer from './answer.vue';
 import { createSubject } from '@/apis/subject'
 import { ElMessage } from 'element-plus'
+import { useTreeHooks } from '../knowledge/treeHooks';
+import { useKnowledge } from '../knowledge/knowledgeHooks';
+const { getTree, dataSource } = useKnowledge()
+const { getLabel, list } = useTreeHooks()
 const questionRef = ref<HTMLElement>()
+const subjectId = ref<string>('')
+const knowledgeId = ref<string[]>([])
 const question = reactive([
     {
         ...useInitObj()
@@ -94,6 +114,12 @@ const isLast = computed(() => {
         return index === question.length - 1
     }
 })
+
+const changeSubject = () => {
+    if (!subjectId.value) return;
+    getTree(subjectId.value)
+    knowledgeId.value = []
+}
 
 const addQuestion = async () => {
     question.push({ ...useInitObj() })
@@ -125,6 +151,6 @@ const submit = async () => {
 .question-create {
     padding: 20px;
     height: 750px;
-    overflow-y: auto
+    overflow-y: auto;
 }
 </style>

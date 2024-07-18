@@ -7,24 +7,24 @@ import { UpdateKnowledgeDto } from './dto/update-knowledge.dto';
 export class KnowledgeController {
   constructor(private readonly knowledgeService: KnowledgeService) {}
 
-  @Post()
+  @Post('/create')
   create(@Body() createKnowledgeDto: CreateKnowledgeDto) {
     return this.knowledgeService.create(createKnowledgeDto);
   }
 
-  @Get()
+  @Get('/list')
   findAll() {
     return this.knowledgeService.findAll();
   }
 
-  @Get(':id')
+  @Get('/list/:id')
   findOne(@Param('id') id: string) {
-    return this.knowledgeService.findOne(+id);
+    return this.knowledgeService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch('/update/:id')
   update(@Param('id') id: string, @Body() updateKnowledgeDto: UpdateKnowledgeDto) {
-    return this.knowledgeService.update(+id, updateKnowledgeDto);
+    return this.knowledgeService.update(id, updateKnowledgeDto);
   }
 
   @Delete(':id')

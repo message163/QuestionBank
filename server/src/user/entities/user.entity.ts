@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 import { Authority } from '../../enum/authority';
+import { UserLeval } from '@questionbank/config/user'
 @Schema()
 export class User {
 
@@ -21,6 +22,9 @@ export class User {
 
     @Prop({ required: true, default: Date.now })
     updateTime: string;
+
+    @Prop({ required: true, enum:UserLeval, default: UserLeval.guest })
+    leval: UserLeval;
 
     @Prop({ required: false })
     age: number;

@@ -6,6 +6,7 @@ import Home from './home'
 import question from './question'
 import knowledge from './knowledge'
 import subject from './subject'
+import user from './user'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -18,7 +19,8 @@ const router = createRouter({
         ...Home, //首页
         ...question,
         ...knowledge,
-        ...subject
+        ...subject,
+        ...user
       ]
     }
   ]

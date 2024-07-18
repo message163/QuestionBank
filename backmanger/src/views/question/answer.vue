@@ -3,7 +3,7 @@
         <div v-if="props.type === 1 || props.type === 2">
             <el-input  v-model="item.value" class="multChoice" v-for="(item, index) in multChoice" placeholder="请输入选项内容">
                 <template #prepend>
-                    <el-checkbox @change="(flag) => checkboxHandler(index, flag)" v-model="item.isAnswer"></el-checkbox>
+                    <el-checkbox @change="(flag: CheckboxValueType) => checkboxHandler(index, flag)" v-model="item.isAnswer"></el-checkbox>
                     <span class="multChoice-text">{{ item.text }}</span>
                 </template>
                 <template #append>

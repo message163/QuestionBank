@@ -97,5 +97,24 @@ export const Router = [
                 authority: 1,
             }
         ]
+    },
+    {
+        title: '用户管理',
+        authority: 1,
+        icon: 'User',
+        id: 11,
+        children: [
+            {
+                title: '用户列表',
+                path: '/page/user',
+                name: 'user',
+                componentUrl: '@/views/user/index.vue',
+                id: 12,
+                order: 5,
+                type: 1,
+                parentId: 11,
+                authority: 1,
+            }
+        ]
     }
 ]

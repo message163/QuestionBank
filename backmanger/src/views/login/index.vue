@@ -47,6 +47,7 @@ import { ElMessage } from 'element-plus'
 import { TOEKN } from '@/config/index'
 import useMenu from '@/stores/menu'
 import Cookie from 'js-cookie'
+import md5 from 'md5'
 const router = useRouter();
 const { getRoutersList } = useMenu()
 const form = ref<FormInstance>();
@@ -100,7 +101,7 @@ const submitForm = () => {
     form.value?.validate(async (valid) => {
         if (valid) {
             try {
-                const res = await login(ruleForm);
+                const res = await login({ ...ruleForm, password: md5(ruleForm.password) });
                 if (res.code == 200) {
                     ElMessage.info(res.data.message)
                     rememberCookie()
