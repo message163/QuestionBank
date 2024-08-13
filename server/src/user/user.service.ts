@@ -9,7 +9,6 @@ import * as svgCaptcha from 'svg-captcha';
 import * as uuid from 'uuid'
 import type { Request, Response } from 'express';
 import { AuthService } from '../auth/auth.service';
-import * as md5 from 'md5'
 @Injectable()
 export class UserService {
   constructor(
@@ -17,7 +16,7 @@ export class UserService {
     private readonly jwt: AuthService
   ) { }
   create(createUserDto: User) {
-    const createUser = new this.user({ ...createUserDto, uuid: uuid.v4(), password: md5(createUserDto.password) });
+    const createUser = new this.user({ ...createUserDto, uuid: uuid.v4(), password: createUserDto.password });
     return createUser.save();
   }
 

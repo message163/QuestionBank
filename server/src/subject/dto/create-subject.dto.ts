@@ -8,3 +8,8 @@ export class CreateSubjectDto {
     category: number
     source: Array<string>
 } []
+
+export interface Page {
+    pageNo: number
+    pageSize: number
+}

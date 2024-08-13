@@ -4,13 +4,28 @@ import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { type SubjectDocument, TableName } from './entities/subject.entity'
 import { Model } from 'mongoose'
 import { InjectModel } from '@nestjs/mongoose'
+import { Request } from 'express';
 @Injectable()
 export class SubjectService {
 
   constructor(@InjectModel(TableName) private readonly subject: Model<SubjectDocument>) { }
-  create(createSubjectDto: CreateSubjectDto) {
-    //存储多个[{},{}]
-    return this.subject.create(createSubjectDto)
+
+  create(req: Request) {
+    if (req.body.length == 0) {
+      return {
+        code: 400,
+        msg: "请传入数据"
+      }
+    } else {
+      const body = req.body as any[]
+      body.forEach((item) => {
+        item.uuid = req.user.uuid
+        item.username = req.user.username
+        item.role = req.user.role
+      })
+      return this.subject.create(body)
+    }
+
   }
 
   findAll() {

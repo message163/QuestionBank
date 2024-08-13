@@ -36,6 +36,18 @@ export const Router = [
                 type: 1,
                 parentId: 3,
                 authority: 1,
+            },
+            {
+                title: '课程代码',
+                path: '/page/course/code',
+                name: 'courseAdd',
+                componentUrl: '@/views/course/code/index.vue',
+                id: 41,
+                icon: 'edit',
+                order: 2,
+                type: 1,
+                parentId: 3,
+                authority: 1,
             }
         ]
     },
@@ -56,7 +68,7 @@ export const Router = [
                 type: 1,
                 parentId: 5,
                 authority: 1,
-            }
+            },
         ]
     },
     {

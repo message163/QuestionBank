@@ -22,9 +22,13 @@ export const subjecetList = [
     },
     {
         value: 6,
-        label: '听力题'
+        label: '作图题'
+    },
+    {
+        value: 7,
+        label: '作文'
     }
-]
+] as const
 
 export const categoryList = [
     {
@@ -81,13 +85,54 @@ export const categoryList = [
     }
 ]
 
+export const difficulty = [
+    {
+        label: 'd1',
+        value: 1
+    },
+    {
+        label: 'd2',
+        value: 2
+    },
+    {
+        label: 'd3',
+        value: 3
+    },
+    {
+        label: 'o1',
+        value: 4
+    },
+    {
+        label: 'o2',
+        value: 5
+    },
+    {
+        label: 'o3',
+        value: 6
+    },
+    {
+        label: 'p1',
+        value: 7
+    },
+    {
+        label: 'p2',
+        value: 8
+    },
+    {
+        label: 'p3',
+        value: 9
+    }
+]
+
+
+
 export class Content {
     text: string
     value: string
     isAnswer: boolean
 }
 
-export type SubjectType = 1 | 2 | 3 | 4 | 5 | 6
+export type SubjectType = typeof subjecetList[number]['value']
 
 export type AwnsersType = string | number | Content[]
 

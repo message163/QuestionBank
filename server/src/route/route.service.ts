@@ -13,7 +13,6 @@ export class RouteService implements OnModuleInit {
     async getRoute(req: Request) {
         return await this.route.find({ authority: req.user.role })
     }
-    
     async onModuleInit() {
         //默认塞入一些路由 并且不会重复塞入
         for await (let routeItem of Router) {

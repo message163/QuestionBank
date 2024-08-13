@@ -9,9 +9,10 @@ import { AuthModule } from './auth/auth.module';
 import { RouteModule } from './route/route.module';
 import { KnowledgeModule } from './knowledge/knowledge.module';
 import { GradeModule } from './grade/grade.module';
+import { CourseCodeModule } from './course-code/course-code.module';
 
 @Module({
-  imports: [DbModule, UserModule, SubjectModule, CourseModule, AuthModule, RouteModule, KnowledgeModule, GradeModule],
+  imports: [DbModule, UserModule, SubjectModule, CourseModule, AuthModule, RouteModule, KnowledgeModule, GradeModule, CourseCodeModule],
   controllers: [AppController],
   providers: [AppService],
 })

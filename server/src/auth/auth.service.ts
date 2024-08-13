@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose';
 import { TableName as UserTableName, type UserDocument } from '../user/entities/user.entity';
+import type { User } from '@questionbank/config/user';
 @Injectable()
 export class AuthService {
   constructor(
@@ -17,7 +18,7 @@ export class AuthService {
   }
 
 
-  createToken({ uuid, role }) {
-    return this.jwt.sign({ uuid, role })
+  createToken({ uuid, role, username, }: User) {
+    return this.jwt.sign({ uuid, role, username })
   }
 }

@@ -29,7 +29,10 @@
             <el-input v-model="textVal" type="textarea" placeholder="请输入简答题答案"></el-input>
         </div>
         <div v-if="props.type === 6">
-            <el-input v-model="listenVal" placeholder="请输入听力题答案"></el-input>
+            <el-input v-model="listenVal" placeholder="请输入答案"></el-input>
+        </div>
+        <div v-if="props.type === 7">
+            <el-input v-model="textVal" type="textarea" placeholder="请输入作文"></el-input>
         </div>
     </div>
 </template>

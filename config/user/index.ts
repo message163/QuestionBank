@@ -5,6 +5,7 @@ export interface User {
     age?: number
     role: number
     leval: UserLeval
+    uuid: string
 }
 
 export interface UserList extends User {

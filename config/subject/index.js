@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Awnsers = exports.Content = exports.categoryList = exports.subjecetList = void 0;
+exports.Awnsers = exports.Content = exports.difficulty = exports.categoryList = exports.subjecetList = void 0;
 exports.subjecetList = [
     {
         value: 1,
@@ -24,7 +24,11 @@ exports.subjecetList = [
     },
     {
         value: 6,
-        label: '听力题'
+        label: '作图题'
+    },
+    {
+        value: 7,
+        label: '作文'
     }
 ];
 exports.categoryList = [
@@ -79,6 +83,44 @@ exports.categoryList = [
     {
         value: 13,
         label: '其他'
+    }
+];
+exports.difficulty = [
+    {
+        label: 'd1',
+        value: 1
+    },
+    {
+        label: 'd2',
+        value: 2
+    },
+    {
+        label: 'd3',
+        value: 3
+    },
+    {
+        label: 'o1',
+        value: 4
+    },
+    {
+        label: 'o2',
+        value: 5
+    },
+    {
+        label: 'o3',
+        value: 6
+    },
+    {
+        label: 'p1',
+        value: 7
+    },
+    {
+        label: 'p2',
+        value: 8
+    },
+    {
+        label: 'p3',
+        value: 9
     }
 ];
 class Content {
