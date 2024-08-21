@@ -17,11 +17,11 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue'])
 
-watch(() => props.modelValue, () => {
-    if (aiEditor) {
-        aiEditor.setContent(props.modelValue)
-    }
-})
+// watch(() => props.modelValue, () => {
+//     if (aiEditor) {
+//         //aiEditor.setContent(props.modelValue)
+//     }
+// })
 
 onMounted(() => {
     aiEditor = new AiEditor({

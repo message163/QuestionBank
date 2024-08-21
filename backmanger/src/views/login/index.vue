@@ -2,7 +2,7 @@
     <div class="login">
         <div class='login-right'>
             <div class="login-right-warp">
-                <div class="login-right-warp-title">login</div>
+                <div class="login-right-warp-title">用户登录</div>
                 <div class="login-right-warp-form">
                     <div class="login-right-warp-form_title">用户名登录</div>
                     <el-form ref="form" style="max-width: 600px" :model="ruleForm" status-icon :rules="rules"

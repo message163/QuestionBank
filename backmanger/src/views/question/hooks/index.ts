@@ -1,23 +1,15 @@
-import type { SubjectType, AwnsersType, Awnsers } from '@questionbank/config/subject/index.ts'
+import { type SubjectType, subjecetList } from '@questionbank/config/subject/index.ts'
 import { getList } from '@/apis/subject';
 import { ref } from 'vue'
 import { page } from '@/config'
 import { useCourseCode } from '../../course/code/hooks'
 export interface Question {
+    testSetNumber: string
     subjectCode: string
     type: SubjectType
-    awnsers: Awnsers
-    analysis: string
+    questionSetName: string
     knowledgeId: number[]
     score: number
-    degree: number
-    options: string
-    testDescription: string
-    answeringRequirements: string
-    pictureAddress: string
-    audioAddress: string
-    videoAddress: string
-    selectedArticleAddress: string
     readingTime: number
     fastestSpeed: number
     slowestSpeed: number
@@ -28,9 +20,13 @@ export interface Question {
     role?: number
     uuid?: string
     version?: number
+    content?: string
+    data?: any[]
 }
 export const useInitObj = () => {
     const originObj: Question = {
+        testSetNumber: '', //试卷编号
+        questionSetName: '', //试卷名称
         subjectCode: '', //学科
         courseCode: '', //课程
         originalScore: 1, //原始分数
@@ -39,21 +35,8 @@ export const useInitObj = () => {
         readingTime: 1, //阅读时间
         difficultyLevel: '', //难度等级
         knowledgeId: [], //关联知识点
-        selectedArticleAddress: '', //选中文章
-        pictureAddress: '', //图片地址
-        audioAddress: '', //音频地址
-        videoAddress: '', //视频地址
-        answeringRequirements: '', //答题要求
-        testDescription: '', //试题描述
         type: 1 as SubjectType, //类型
-        awnsers: {
-            type: 1 as SubjectType,
-            content: '' as AwnsersType
-        }, //答案
-        options: '', //选项
-        analysis: '', //解析
         score: 1, //分值
-        degree: 1, //难度
     }
     return window.structuredClone(originObj)
 }
@@ -68,10 +51,27 @@ export const useSubjectList = () => {
     const getCourseLabel = (id: string) => {
         return course.data.value.find((v) => v._id === id)?.name ?? ''
     }
+    const findSubject = (type: SubjectType) => {
+        console.log(type)
+        return subjecetList.find((v) => v.value === type).label
+    }
+    const handleAnwer = (val: any) => {
+        if (typeof val === 'string') {
+            return val
+        } else if (Array.isArray(val)) {
+            return val.join(',')
+        } else if (typeof val === 'number') {
+            return val == 1 ? '正确' : '错误'
+        } else {
+            return val
+        }
+    }
     getSubjectList()
     return {
         data,
         getSubjectList,
-        getCourseLabel
+        getCourseLabel,
+        findSubject,
+        handleAnwer
     }
 }

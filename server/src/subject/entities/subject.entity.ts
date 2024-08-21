@@ -6,19 +6,19 @@ import { SubjectType, Awnsers } from '@questionbank/config/subject'
 export class Subject {
 
     @Prop()
+    testSetNumber: string //试卷编号
+
+    @Prop()
+    questionSetName: string //试卷名称
+
+    @Prop()
     subjectCode: string //学科
 
     @Prop()
     type: SubjectType //类型
 
-    @Prop({ type: Object })
-    awnsers: Awnsers //答案
-
     @Prop({ type: Array })
     knowledgeId: number[] //关联知识点
-
-    @Prop()
-    analysis: string //解析
 
     @Prop()
     courseCode: string //课程
@@ -47,27 +47,8 @@ export class Subject {
     @Prop()
     readingTime: number //阅读时间
 
-
     @Prop()
-    selectedArticleAddress: string //选中文章
-
-    @Prop()
-    pictureAddress: string //图片地址
-
-    @Prop()
-    audioAddress: string //音频地址
-
-    @Prop()
-    videoAddress: string //视频地址
-
-    @Prop()
-    answeringRequirements: string //答题要求
-
-    @Prop()
-    testDescription: string //试题描述
-
-    @Prop()
-    options: string //选项
+    difficultyLevel: string //难度等级
 
     @Prop()
     degree: number //难度
@@ -83,6 +64,12 @@ export class Subject {
 
     @Prop()
     role: number //角色
+
+    @Prop()
+    content: string //题目内容
+
+    @Prop({ type: Array })
+    data: any[]
 
 
 }

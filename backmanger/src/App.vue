@@ -62,4 +62,18 @@
     background: rgb(68, 68, 68);
     border-radius: 10px;
 }
+
+.flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.primary {
+    color: var(--el-color-primary);
+    font-weight: 800;
+    font-size: 16px;
+}
 </style>

@@ -18,15 +18,11 @@ export const subjecetList = [
     },
     {
         value: 5,
-        label: '问答题'
+        label: '简答题'
     },
     {
         value: 6,
-        label: '作图题'
-    },
-    {
-        value: 7,
-        label: '作文'
+        label: '阅读题'
     }
 ] as const
 

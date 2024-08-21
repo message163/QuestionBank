@@ -1,9 +1,7 @@
 <template>
    <div class="content">
       <router-view v-slot="{ Component }">
-         <keep-alive :include="['Question']">
-            <component :is="Component" />
-         </keep-alive>
+         <component :is="Component" />
       </router-view>
    </div>
 </template>

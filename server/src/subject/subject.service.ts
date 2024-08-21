@@ -17,12 +17,12 @@ export class SubjectService {
         msg: "请传入数据"
       }
     } else {
-      const body = req.body as any[]
-      body.forEach((item) => {
-        item.uuid = req.user.uuid
-        item.username = req.user.username
-        item.role = req.user.role
-      })
+      const body = {
+        ...req.body,
+        uuid: req.user.uuid,
+        username: req.user.username,
+        role: req.user.role
+      }
       return this.subject.create(body)
     }
 

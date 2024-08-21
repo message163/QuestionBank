@@ -22,7 +22,7 @@ export class UserService {
 
 
   createCode(req, res: Response) {
-    const captcha = svgCaptcha.create({
+    const captcha = svgCaptcha.createMathExpr({
       size: 4,
       ignoreChars: '0o1i',
       color: true,

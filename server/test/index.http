@@ -13,14 +13,28 @@
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYmQ0YWQ0Y2MtMjdkNC00ZDM4LWJjYTAtMmI0MTQ4NDRlZTI3IiwiaWF0IjoxNzE4MjM4ODkxLCJleHAiOjE3MTgyMzg5NTF9.meeeXDAZpKwLYXew6yev8zb2Q6w2VRTbX-847xFRey8
 
 
-POST http://localhost:3000/user/create HTTP/1.1
-Host: localhost:3000
+# POST http://localhost:3000/user/create HTTP/1.1
+# Host: localhost:3000
+# Content-Type: application/json
+
+# {
+    
+#     "account": "admin",
+#     "password": "admin",
+#     "username": "Admin",
+#     "role":1
+# }
+
+POST http://47.109.198.147:3000/user/create HTTP/1.1
+Host: http://47.109.198.147
 Content-Type: application/json
 
 {
     
     "account": "admin",
-    "password": "admin",
+    "password": "21232f297a57a5a743894a0e4a801fc3",
     "username": "Admin",
     "role":1
 }
+
+
